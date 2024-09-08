@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/31 13:35:48 by yowazga           #+#    #+#             */
-/*   Updated: 2024/09/02 20:38:52 by yowazga          ###   ########.fr       */
+/*   Created: 2024/09/03 13:28:34 by yowazga           #+#    #+#             */
+/*   Updated: 2024/09/04 19:56:52 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,77 +14,73 @@ import java.util.Scanner;
 
 public class Program {
 
-	private static final int MAX_CHAR = 65535;
 	private static Scanner scanner = new Scanner(System.in);
+	private static final int MAX_CHARS = 65535;
 
-	private static short[] countCharacters(String input)
-	{
-		short [] charsCount = new short[MAX_CHAR];
-		char[] inputChars = input.toCharArray();
-		
-		for (int i = 0; i < inputChars.length; i++) {
-			charsCount[inputChars[i]]++;
+	private static short[] getFrequency(String input) {
+		short[] countChars = new short[MAX_CHARS];
+		char[] charArray = input.toCharArray();
+
+		for (int i = 0; i < charArray.length; i++) {
+			countChars[charArray[i]]++;
 		}
-		return charsCount;
+
+		return countChars;
 	}
 
-	private static char[][] topTen(short[] charsCount)
-	{
-		char[][] top10 = new char[2][10];
-		
-		for (int i = 0; i < MAX_CHAR; i++){
-			if (charsCount[i] > top10[1][9]){
-				top10[0][9] = (char )i;
-				top10[1][9] = (char )charsCount[i];
+	private static char[][] getTopTen(short[] countChars) {
+		char[][] topTen = new char[2][10];
+
+		for (int i = 0; i < MAX_CHARS; i++) {
+			if (countChars[i] > topTen[1][9]) {
+				topTen[0][9] = (char )i;
+				topTen[1][9] = (char)countChars[i];
 				for (int j = 8; j >= 0; j--) {
-					if (top10[1][j] < top10[1][j + 1]) {
-						char tempChar = top10[0][j];
-						char tempCount = top10[1][j];
-						top10[0][j] = top10[0][j + 1];
-						top10[1][j] = top10[1][j + 1];
-						top10[0][j + 1] = tempChar;
-						top10[1][j + 1] = tempCount;
+					if (topTen[1][j] < topTen[1][j + 1]) {
+						char tempChar = topTen[0][j + 1];
+						char tempCounter = topTen[1][j + 1];
+						topTen[0][j + 1] = topTen[0][j];
+						topTen[1][j + 1] = topTen[1][j];
+						topTen[0][j] = tempChar;
+						topTen[1][j] = tempCounter;
 					} else {
 						break ;
 					}
 				}
 			}
 		}
-		return top10;
+		return topTen;
 	}
 
-	public static void putCharp(int i, char[] topTenCount)
-	{
+	private static void printRow(char[] row, int i) {
 		for (int j = 0; j < 10; j++) {
-			if (topTenCount[j] * 10 / topTenCount[0] == i) {
-				System.out.printf("%3d ", (int) topTenCount[j]);
-			} else if (topTenCount[j] * 10 / topTenCount[0] > i) {
+			if (row[j] * 10 / row[0] == i) {
+				System.out.printf("%3d ", (int)row[j]);
+			} else if (row[j] * 10 / row[0] > i) {
 				System.out.print("  # ");
 			} else {
 				System.out.print("    ");
 			}
 		}
-		System.out.println();
 	}
 
-	private static void printGraph(char[][] topTen)
-	{
+	private static void printGraph(char[][] topTen) {
 		for (int i = 10; i >= 0; i--) {
-			putCharp(i, topTen[1]);
+			printRow(topTen[1], i);
+			System.out.println();
 		}
 		for (int i = 0; i < 10; i++) {
-			System.out.printf("%3c ", topTen[0][i]);
+			System.out.printf("%3c ", (char )topTen[0][i]);
 		}
 	}
 	
-	public static void main(String[] args) 
-	{
+	public static void main(String[] args) {
 		String input = scanner.nextLine();
-
-		short[] charsCount = countCharacters(input);
-		char[][] topten = topTen(charsCount);
-		printGraph(topten);
-
+		
+		short[] countChars = getFrequency(input);
+		char[][] topTen = getTopTen(countChars);
+		printGraph(topTen);
+		
 		scanner.close();
 	}
 }
