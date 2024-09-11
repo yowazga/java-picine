@@ -5,28 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 07:32:50 by yowazga           #+#    #+#             */
-/*   Updated: 2024/09/11 10:13:26 by yowazga          ###   ########.fr       */
+/*   Created: 2024/09/11 10:26:53 by yowazga           #+#    #+#             */
+/*   Updated: 2024/09/11 10:27:14 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 public class Program {
 
 	public static void main(String[] args) {
 		
-		User user1 = new User("younes", 1000);
-		User user2 = new User("ilyass", 2000);
-
-		System.out.println(user1);
-		System.out.println(user2);
-		
-		System.err.println();
-
-		Transaction t1 = new Transaction(user1, user2, 500);
-		Transaction t2 = new Transaction(user2, user1, -300);
-
-		System.err.println(t1);
-		System.err.println(t2);
 	}
 }
