@@ -6,7 +6,7 @@
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 07:33:03 by yowazga           #+#    #+#             */
-/*   Updated: 2024/09/11 10:16:08 by yowazga          ###   ########.fr       */
+/*   Updated: 2024/09/11 11:37:36 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ public class Transaction {
 		return this.amount;
 	}
 
+	@Overried
 	public String toString() {
 		return String.format("Transaction [Identifier: %s, Recipient: %s, Sender: %s, Category: %s, Amount: %s]", getIdentifier(), getRecipient().getName(), getSender().getName(), getCategory().getText(), getAmount());
 	}
