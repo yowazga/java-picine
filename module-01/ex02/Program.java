@@ -1,34 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   UserIdsGenerator.java                              :+:      :+:    :+:   */
+/*   Program.java                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/11 10:27:22 by yowazga           #+#    #+#             */
-/*   Updated: 2024/09/11 12:07:32 by yowazga          ###   ########.fr       */
+/*   Created: 2024/09/11 11:48:31 by yowazga           #+#    #+#             */
+/*   Updated: 2024/09/12 08:25:42 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Singleton class
-public class UserIdsGenerator {
+public class Program {
 
-	private static UserIdsGenerator generatorInstance = null;
-	private Integer lastId;
-
-	private UserIdsGenerator() {
-		this.lastId = -1;
-	}
-
-	public static UserIdsGenerator getInstance() {
+	public static void main(String[] args) {
 		
-		if (generatorInstance == null) {
-			generatorInstance = new UserIdsGenerator();
-		}
-		return generatorInstance;
-	}
+		UsersArrayList users = new UsersArrayList();
 
-	public Integer generateId() {
-		return ++this.lastId;
+		for (int i = 0; i < 11; i++) {
+			users.addUser(new User(String.format("younes%s", i), 100 + i));
+		}
+
+		// System.out.println(users.getUserById(12));
+		
+		System.out.println(users.getUserById(9));
+		
+		System.out.println(users.getNumberOfUsers());
+		
 	}
 }
