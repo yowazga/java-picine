@@ -6,7 +6,7 @@
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 07:33:03 by yowazga           #+#    #+#             */
-/*   Updated: 2024/09/16 10:36:06 by yowazga          ###   ########.fr       */
+/*   Updated: 2024/09/16 12:33:08 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ public class Transaction {
 	private User sender;
 	private TransferCategory category;
 	private Integer amount;
+
+	public Transaction(User sender, User recipient, Integer amount, TransferCategory category, String identifier) {
+		this.identifier = identifier;
+		this.recipient = recipient;
+		this.sender = sender;
+		this.category = category;
+		this.amount = amount;
+	}
 
 	public Transaction(User sender, User recipient, Integer amount) {
 		this.identifier = UUID.randomUUID().toString();

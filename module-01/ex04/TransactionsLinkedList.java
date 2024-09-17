@@ -6,7 +6,7 @@
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 11:14:10 by yowazga           #+#    #+#             */
-/*   Updated: 2024/09/15 15:03:15 by yowazga          ###   ########.fr       */
+/*   Updated: 2024/09/16 20:44:49 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,18 @@ public class TransactionsLinkedList implements TransactionsList {
 		this.head = null;
 		this.tail = null;
 		this.size = 0;
+	}
+
+	@Override
+	public Transaction getTransactionById(String identifer) {
+		Node curent = this.head;
+		while (curent != null) {
+			if (curent.getTransaction().getIdentifier().equals(identifer)) {
+				return curent.getTransaction();
+			}
+			curent = curent.getNext();
+		}
+		return null;
 	}
 
 	@Override
