@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Program.java                                       :+:      :+:    :+:   */
+/*   Command.java                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 12:10:42 by yowazga           #+#    #+#             */
-/*   Updated: 2024/10/20 12:14:55 by yowazga          ###   ########.fr       */
+/*   Created: 2024/10/19 12:48:50 by yowazga           #+#    #+#             */
+/*   Updated: 2024/10/19 13:06:59 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import java.nio.file.*;
-import java.util.*;
+import java.io.IOException;
+import java.nio.file.Path;
 
-public class Program {
+public interface Command {
 
-	private Path currentDirectory;
-	private Map<String, Command> commands;
-	
-	public static void main(String[] args) {
-		
-	
+	void runCommands(Path curentDirectory, String args) throws IOException;
+
+	public static class TooManyArguments extends IllegalArgumentException {
+		public TooManyArguments(String command) {
+			super(command + ": too many arguments");
+		}
 	}
 }
