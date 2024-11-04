@@ -22,4 +22,10 @@ public interface Command {
 			super(command + ": too many arguments");
 		}
 	}
+
+	public static class NoSuchFileOrDirectory extends IllegalArgumentException {
+		public NoSuchFileOrDirectory(String command, String fileOrDir) {
+			super(command + )
+		}
+	}
 }
