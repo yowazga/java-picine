@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Program.java                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 09:32:58 by yowazga           #+#    #+#             */
-/*   Updated: 2024/10/14 13:34:38 by yowazga          ###   ########.fr       */
+/*   Updated: 2024/11/08 16:04:38 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import java.io.FileWriter;
 import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 
 public class Program {
 
