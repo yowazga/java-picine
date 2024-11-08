@@ -6,7 +6,7 @@
 /*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:51:40 by yowazga           #+#    #+#             */
-/*   Updated: 2024/11/07 18:54:07 by yowazga          ###   ########.fr       */
+/*   Updated: 2024/11/07 22:06:08 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ public class Cd implements Command {
 
 		this.curentPath = newPath;
 
-		System.err.println(this.curentPath.normalize());
+		System.out.println(this.curentPath.normalize());
 	}
 }

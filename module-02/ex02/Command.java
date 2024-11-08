@@ -6,7 +6,7 @@
 /*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 12:48:50 by yowazga           #+#    #+#             */
-/*   Updated: 2024/11/05 15:28:23 by yowazga          ###   ########.fr       */
+/*   Updated: 2024/11/08 15:59:08 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ public interface Command {
 
 	public static class NoSuchFileOrDirectory extends IllegalArgumentException {
 		public NoSuchFileOrDirectory(String command, String fileOrDir) {
-			super(command + ": " + fileOrDir + ": Not a directory.");
+			super(command + ": " + fileOrDir + ": No SuchFile Or Directory.");
 		}
 	}
 
@@ -49,7 +49,13 @@ public interface Command {
 
 	public static class InvalidArgumments extends IllegalArgumentException {
 		public InvalidArgumments(String command, String fileOrDir) {
-			super(command + ": " + fileOrDir + "Invalid arguments.");
+			super(command + ": " + fileOrDir + " Invalid arguments.");
+		}
+	}
+
+	public static class FileAlreadyExists extends IllegalArgumentException {
+		FileAlreadyExists(String command, String fileOrDir) {
+			super(command + ": " + fileOrDir + "file already exists.");
 		}
 	}
 }

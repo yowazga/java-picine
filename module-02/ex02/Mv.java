@@ -6,11 +6,12 @@
 /*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 20:30:37 by yowazga           #+#    #+#             */
-/*   Updated: 2024/11/07 21:06:55 by yowazga          ###   ########.fr       */
+/*   Updated: 2024/11/08 15:54:09 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -22,50 +23,30 @@ public class Mv implements Command {
 		
 		if (args.length > 2)
 			throw new TooManyArguments("mv");
-		else if (args.length < 2)
+		if (args.length < 2)
 			throw new NeedMoreArguments("mv");
+			
+		Path firsPath = curentDirectory.resolve(args[0]).normalize();
+		Path secondPath = curentDirectory.resolve(args[1]).normalize();
 		
-		Path fromPath = curentDirectory.resolve(args[0]).normalize();
-		if (!fromPath.toFile().exists())
-			throw new NoSuchFileOrDirectory("mv", args[0]);
+		if (!firsPath.toFile().exists())
+			throw new NoSuchFileOrDirectory("mv", firsPath.toString());
+		if (!firsPath.toFile().canWrite())
+			throw new AccessDenid("mv", firsPath.toString());
+
+		if (Files.isDirectory(secondPath)) {
 			
-		if (!fromPath.toFile().canWrite())
-			throw new AccessDenid("mv", fromPath.toString());
-			
-		if (args[1].contains("/")) {
-			Path toPath = curentDirectory.resolve(args[1]).normalize();
-			fileToMove(fromPath, toPath);
+			Path destinationPath = secondPath.resolve(firsPath.getFileName());
+			if (!secondPath.toFile().exists())
+				throw new NoSuchFileOrDirectory("mv", secondPath.toString());
+			if (!secondPath.toFile().canWrite())
+				throw new AccessDenid("mv", secondPath.toString());
+				
+			Files.move(firsPath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
 		} else {
-			renameFile(fromPath, args[1]);
+			
+			Files.move(firsPath, secondPath, StandardCopyOption.REPLACE_EXISTING);
 		}
-	}
-
-	private void fileToMove(Path fromPath, Path toPath) throws IOException {
-		
-		if (!toPath.toFile().exists())
-			throw new NoSuchFileOrDirectory("mv", toPath.toString());
-		if (!toPath.toFile().isDirectory())
-			throw new NotDir("mv", toPath.toString());
-		if (!toPath.toFile().canWrite())
-			throw new AccessDenid("mv", toPath.toString());
-
-		Path toMove = toPath.resolve(fromPath.getFileName());
-
-		System.out.println(fromPath.normalize());
-		System.out.println(toMove.normalize());
-
-		Files.move(fromPath, toMove, StandardCopyOption.REPLACE_EXISTING);
-	}
-
-	private void renameFile(Path fromPath, String toPaht) throws IOException {
-		
-		System.out.println(fromPath.normalize());
-		
-		Path toMove = fromPath.getParent().resolve(toPaht).normalize();
-		
-		System.out.println(toMove.normalize());
-
-		Files.move(fromPath, toMove, StandardCopyOption.REPLACE_EXISTING);
 	}
 	
 }
