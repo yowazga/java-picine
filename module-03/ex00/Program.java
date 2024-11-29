@@ -6,7 +6,7 @@
 /*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 12:35:45 by yowazga           #+#    #+#             */
-/*   Updated: 2024/11/10 16:24:13 by yowazga          ###   ########.fr       */
+/*   Updated: 2024/11/29 09:49:52 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ public class Program {
 				"Little lambs eat ivy",
 				"A kid will eat evy too"
 			};
-
 			try {
 				for (int i = 0; i < importantInfo.length; i++) {
 					
