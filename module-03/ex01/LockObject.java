@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Hen.java                                           :+:      :+:    :+:   */
+/*   LockObject.java                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/26 16:04:52 by yowazga           #+#    #+#             */
-/*   Updated: 2025/02/26 16:45:48 by yowazga          ###   ########.fr       */
+/*   Created: 2025/02/26 15:54:45 by yowazga           #+#    #+#             */
+/*   Updated: 2025/02/26 16:05:39 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-public class Hen implements Runnable {
+public class LockObject {
 	
-	private LockObject lock;
+	private Integer numberOfInswers;
+	public boolean turn;
 
-	public Hen(LockObject lock) {this.lock = lock;}
+	public LockObject() {this.turn = true;}
 	
-	@Override
-	public void run() {
-		synchronized (lock) {
-			for (int i = 0; i < this.lock.getNumberOfInswers(); i++) {
-				while (this.lock.turn) {
-					try { lock.wait(); } catch (Exception e) {}
-				}
-				System.out.println("Hen");
-				this.lock.turn = true;
-				lock.notify();
-			}
-		}
+	public Integer getNumberOfInswers() {return this.numberOfInswers;}
+	
+	public void setNumberOfInswers(Integer number) {
+		this.numberOfInswers = number;
 	}
 }

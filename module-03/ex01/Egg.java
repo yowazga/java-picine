@@ -6,20 +6,27 @@
 /*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 16:02:09 by yowazga           #+#    #+#             */
-/*   Updated: 2025/02/25 16:43:46 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:45:54 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-public class Egg extends Thread
-{
-	private Integer count;
+public class Egg extends Thread {
 
-	public Egg(Integer number) {this.count = number;}
+	private LockObject lock;
+
+	public Egg(LockObject lock) {this.lock = lock;}
 
 	@Override
 	public void run() {
-		for (int i = 0; i < this.count; i++)
-			System.out.println("Egg");
+		synchronized (lock) {
+			for (int i = 0; i < this.lock.getNumberOfInswers(); i++) {
+				while (!this.lock.turn){
+					try { lock.wait(); } catch (Exception e) {}
+				}
+				System.out.println("Egg");
+				this.lock.turn = false;
+				lock.notify();
+			}
+		}
 	}
-	
 }

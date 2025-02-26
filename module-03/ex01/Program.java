@@ -6,25 +6,17 @@
 /*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 12:35:45 by yowazga           #+#    #+#             */
-/*   Updated: 2025/02/25 17:15:22 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:14:49 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 public class Program {
-
-	private Integer numberOfInswers;
-
-	public Integer getNumberOfInswers(){return this.numberOfInswers;}
 	
-	public void setNumberOfInswers(Integer number) {
-		this.numberOfInswers = number;
-	}
-	
-	private void parsAnswer(String number) throws IllegalArgumentException,  NumberFormatException {
+	public Integer parsAnswer(String number) throws IllegalArgumentException,  NumberFormatException {
 		String[] table = number.split("=");
 		if (table.length != 2 || !table[0].equals("--count"))
 		throw new IllegalArgumentException("invalid argument");
-		setNumberOfInswers(Integer.parseInt(table[1]));
+		return Integer.parseInt(table[1]);
 	}
 	public static void main(String[] args) throws InterruptedException
 	{
@@ -35,18 +27,18 @@ public class Program {
 		}
 		try
 		{
-			Program program = new Program();
-			program.parsAnswer(args[0]);
+			LockObject lock = new LockObject();
+			lock.setNumberOfInswers(new Program().parsAnswer(args[0]));
 			
-			Hen thread1 = new Hen(program.getNumberOfInswers());
+			Hen thread1 = new Hen(lock);
 			Thread hen = new Thread(thread1);
-			Egg egg = new Egg(program.getNumberOfInswers());
-			hen.start();
+			Egg egg = new Egg(lock);
+			
 			egg.start();
+			hen.start();
+			
 			hen.join();
 			egg.join();
-			for (int i = 0; i < program.getNumberOfInswers(); i++)
-				System.out.println("Human");
 		}
 		catch(Exception e) {
 			System.err.println(e.getMessage());
