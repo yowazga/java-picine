@@ -1,0 +1,40 @@
+# README.txt
+
+Project: Image to Character Converter
+This program converts a black-and-white BMP image into a character-based representation in the console. It accepts command-line arguments to specify the characters for white and black pixels, as well as the path to the image file.
+
+# Project Structure
+ImagesToChar/
+├── src/
+│   ├── fr/
+│   │   ├── school42/
+│   │   │   ├── printer/
+│   │   │   │   ├── app/
+│   │   │   │   │   └── Program.java
+│   │   │   │   ├── logic/
+│   │   │   │   │   └── ImageConverter.java
+│   ├── resources/
+│   │   └── image.bmp       <-- BMP image embedded in the JAR
+|	├── manifest.txt            <-- Manifest file for the JAR
+├── README.txt
+
+# How to Build and Run the JAR File
+
+1- Navigate to the Project Directory:
+Open a terminal and navigate to the root directory of the project (ImagesToChar).
+2- Compile the Program:
+Run the following command to compile the Java source files:
+		javac -d target ./src/java/fr/school42/**/*.java
+3- Copy Resources:
+Copy the image.bmp file and the manifest.txt file to the target directory:
+	cp src/resources/image.bmp target/
+	cp manifest.txt target/
+4- Create the JAR File:
+	Navigate to the target directory and run the following command:
+		jar cvfm images-to-chars-printer.jar manifest.txt fr/school42/printer/**/*.class image.bmp
+5- Run the JAR File:
+	Use the following command to run the JAR file:
+		java -jar images-to-chars-printer.jar <black_char> <white_char>
+
+Example:
+	java -jar images-to-chars-printer.jar 0 .
