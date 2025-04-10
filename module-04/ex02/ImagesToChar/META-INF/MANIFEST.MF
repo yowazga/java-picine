@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1653896711439
+Build-Jdk-Spec: 1.8
+Bundle-Description: An easy syntax to format your strings with colored
+  fonts and backgrounds.
+Bundle-License: https://opensource.org/licenses/MIT
+Bundle-ManifestVersion: 2
+Bundle-Name: com.diogonunes:JColor
+Bundle-SymbolicName: com.diogonunes.JColor
+Bundle-Version: 5.5.1
+Created-By: Apache Maven Bundle Plugin 5.1.5
+Export-Package: com.diogonunes.jcolor;version="5.5.1"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+Tool: Bnd-6.2.0.202202251641
+

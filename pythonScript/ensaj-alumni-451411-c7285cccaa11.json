@@ -1,0 +1,13 @@
+{
+	"type": "service_account",
+	"project_id": "ensaj-alumni-451411",
+	"private_key_id": "c7285cccaa1108aa6f06fd1187f3f13466cc6032",
+	"private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCSvYyl7TC04phX\nI3Hx3U99tTboXoo89C6VnHA61l74/0+mNjnUGt5J1piS1i81Nty1Ke1hAGnvlBk3\n7R7L48rcdrKPrjGNsePGAi+qQ/9hbYbf9BiuDXytsBhgA6pUHViUZxHpAdjSOo/E\nc4ebLLW3ZpBdOXdpuspFM8axkR3kQgd+pIPZ1ozcQyGgihvr/cO/9zHi8v4SDnWQ\nZsXYQ7fqfUtwREmj50FCv/I6bhguKtDL/hDMiFqmdzd2waC7Sg+o8hsvPQraMSN1\nQK7JFQ+Ntk2RCGKw9J3X4FfIGivegAokvU3tbnhdE4NaXL6/lcB5f6RgeS7biMy4\nepkuJ9g/AgMBAAECggEAEs6Paa66KNzH2Jc24eBS8VIZ7PM89W34UH2B1tCl0HTs\ncOmPRNOCvOTvnhYsa74R0HhEr8N9UFLjXosaANi7pcDixs51FGuBvV2HXWOkpgiD\nGk3vIdOhsKMapKejm289bJu/LGVrtBoEVhHWhflXet9+zivw1ZC2nuLxas2mDpyE\nKOPDsB5io12LcsFJ2boyLqB6JHKpOJDUlr3gfrkhXzMAgcmbBKaROeKFzSEpKc71\nsRDwqMLYdbWY2dJQuGvHsWjK4yCI7nnQcTTOjO+I37tmlWn+M8xRHn8URBPiOWHz\n8Sf/81fX1XTexU/173g7AZlM1ywXtRDeQYPiUETG1QKBgQDELGQ8TAPXCuT1bjbt\nzzdvSPccpQSaDYZDZMYL9e7CdRxwCL9pK8IZY8mgsDUreDDTKSLb9IRM8nVwp65I\n3XbGIZSVVG9MeZjxdpPqlLOM6x0swUz194BYND4pcH7cRAeoGbl7tzL4v3vC8B5I\nt7oZF0VYyGj+yYThIfLfLmeBawKBgQC/fdZCaCKCUU8Xeka6BW1aJ4YpqhqIbpgK\nMkICLMVEcow4kRpU5xkDlp10R7xaJJ+INCAr2L9F7vMdZj3MPVQB8gYG1w6o91iy\nZeVym4vdgy6kxYjvMSAf8Y9Kuko3C5V+rH06HbwA7LUcOXT2on+UnUzMGvfinvVj\nP4qsQ5e1fQKBgHVQdsD4VHONOE7tkju059nNMLoYlR/rZpd29FjCwf3YOyFkmdMz\nL+gvHKzTs3hDcC9XMlmHaHb7p++u1zML/bOO8WQ8EjMRpL0BxINMWfOzxsa08mlF\nkaMt2t69P6BJrqqAd8PcUsce+8wf/HxQIyJOIFJvxxpXOPfJbYy6G3vxAoGACgri\narclYCo9eKC8BtN0Ca9a9OJr483RAW/jUFPiwJU1T14kwGEiSbLjbQ66DQwwpab+\nLO6AEX3XmCodgZGRz0xPDprGtQvLxgdcAiewLRzNHG0Tol+0LJixiBy++aYM4AjR\nxHN8wZuoX+OPg8O/5x5cwbOEXokxm1PgxOoCkc0CgYEAu+pBpIiR5XUcJtfkkxyf\nCsg0ehMSbnpGCdVWaZEQmC1O/JzmLDg6ehFCInbCslG7iWiRZo41B6JbfTeRfZfH\nbgmlN8YFxTDpdMG5Q9bsxjBMGK41TXnQ+yLMthSU9zfEYgdPDbkrCGMPGajGbeOA\nztBtmBzIQvAKh9GoKaLGgOs=\n-----END PRIVATE KEY-----\n",
+	"client_email": "ensaalumni3@ensaj-alumni-451411.iam.gserviceaccount.com",
+	"client_id": "100280851059757689264",
+	"auth_uri": "https://accounts.google.com/o/oauth2/auth",
+	"token_uri": "https://oauth2.googleapis.com/token",
+	"auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+	"client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ensaalumni3%40ensaj-alumni-451411.iam.gserviceaccount.com",
+	"universe_domain": "googleapis.com"
+  }
