@@ -6,13 +6,14 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:14 by Younes            #+#    #+#             */
-/*   Updated: 2025/05/08 16:13:54 by Younes           ###   ########.fr       */
+/*   Updated: 2025/05/15 15:56:51 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 package fr.school42.chat.models;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Message {
@@ -58,12 +59,15 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{" +
-               "id = " + id +
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HH:mm");
+        String formattedDate = createdAt != null ? createdAt.format(formatter) : "N/A";
+        return "Message : {\n" +
+               "id=" + id + '\n' +
                ", author = " + (author != null ? author.getLogin() : "null") +
                ", chatroom = " + (chatroom != null ? chatroom.getName() : "null") +
                ", textPreview = '" + (text.substring(0, Math.min(20, text.length()))) + "'" +
-               ", createdAt = " + createdAt + '}';
+               ", createdAt = " + formattedDate + '}';
     }
     
 }

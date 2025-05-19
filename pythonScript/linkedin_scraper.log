@@ -1,4 +1,0 @@
-[2025-04-07 21:21:07] Session started at 2025-04-07 21:21:07
-[2025-04-07 21:21:07] 📊 Loading Excel data from input_data.xlsx
-[2025-04-07 21:21:07] ❌ Error loading Excel data: [Errno 2] No such file or directory: 'input_data.xlsx'
-[2025-04-07 21:21:07] 🔄 Closing session.

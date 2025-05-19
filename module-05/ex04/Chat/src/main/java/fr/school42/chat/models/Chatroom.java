@@ -6,7 +6,7 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 13:13:17 by Younes            #+#    #+#             */
-/*   Updated: 2025/05/08 18:33:00 by Younes           ###   ########.fr       */
+/*   Updated: 2025/05/18 12:33:29 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ public class Chatroom {
     private String name;
     private User owner;
     private List<Message> messages = new ArrayList<>();
-    
+
+
     public Long getId() {return this.id;}
     public void setId(Long id) {this.id = id;}
 
