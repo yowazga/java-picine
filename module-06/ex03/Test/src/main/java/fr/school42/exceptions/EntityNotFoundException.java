@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   UsersRepository.java                               :+:      :+:    :+:   */
+/*   EntityNotFoundException.java                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 18:06:59 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/13 20:42:37 by Younes           ###   ########.fr       */
+/*   Created: 2025/06/12 18:35:16 by Younes            #+#    #+#             */
+/*   Updated: 2025/06/12 18:35:18 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-package fr.school42.repositories;
+package fr.school42.exceptions;
 
-import fr.school42.exceptions.EntityNotFoundException;
-import fr.school42.models.User;
-
-public interface UsersRepository {
-    
-    User findByLogin(String login) throws EntityNotFoundException;
-    
-    void update(User user) throws EntityNotFoundException;
+// When user doesn't exist
+public class EntityNotFoundException extends RuntimeException {
+    public EntityNotFoundException(String message) {
+        super(message);
+    }
 }

@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   UsersRepository.java                               :+:      :+:    :+:   */
+/*   AlreadyAuthenticatedException.java                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/12 18:06:59 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/13 20:42:37 by Younes           ###   ########.fr       */
+/*   Created: 2025/06/12 18:34:35 by Younes            #+#    #+#             */
+/*   Updated: 2025/06/12 18:42:03 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-package fr.school42.repositories;
+package fr.school42.exceptions;
 
-import fr.school42.exceptions.EntityNotFoundException;
-import fr.school42.models.User;
+public class AlreadyAuthenticatedException extends RuntimeException {
 
-public interface UsersRepository {
+    public AlreadyAuthenticatedException() {
+        super("User is already authenticated");
+    }
     
-    User findByLogin(String login) throws EntityNotFoundException;
-    
-    void update(User user) throws EntityNotFoundException;
+    public AlreadyAuthenticatedException(String message) {
+        super(message);
+    }
 }
