@@ -19,9 +19,22 @@
         <property name="driverClassName" value="${db.driver.name}"/>
     </bean>
 
+    <!-- HikariDataSource -->
+    <bean id="hikariDataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+        <property name="jdbcUrl" value="${db.url}"/>
+        <property name="username" value="${db.user}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="driverClassName" value="${db.driver.name}"/>
+    </bean>
+
     <!-- Repository bean -->
     <bean id="usersRepositoryJdbc" class="school42.spring.service.repositories.UsersRepositoryJdbcImpl">
         <constructor-arg ref="dataSource"/>
+    </bean>
+
+    <!-- JdbcTemplate repository using HikariDataSource -->
+    <bean id="UsersRepositoryJdbcTemplateImpl"  class="school42.spring.service.repositories.UsersRepositoryJdbcTemplateImpl">
+        <constructor-arg ref="hikariDataSource"/>
     </bean>
 
 </beans>

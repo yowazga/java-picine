@@ -6,7 +6,7 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 16:28:11 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/25 19:18:10 by Younes           ###   ########.fr       */
+/*   Updated: 2025/06/25 19:46:16 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ public class Main
     {
         ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 
-        Printer print = context.getBean("printerWithDate", Printer.class);
+        Printer print = context.getBean("printerWithPrefix", Printer.class);
         print.print("hello");
     }
 }
