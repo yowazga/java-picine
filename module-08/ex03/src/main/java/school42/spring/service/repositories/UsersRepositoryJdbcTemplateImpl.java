@@ -6,7 +6,7 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 18:44:50 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/28 14:51:25 by Younes           ###   ########.fr       */
+/*   Updated: 2025/06/29 11:53:32 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Repository;
 
 import school42.spring.service.models.User;
 
+@Repository
 public class UsersRepositoryJdbcTemplateImpl implements UsersRepository, RowMapper<User>{
 
     private final JdbcTemplate jdbcTemplate;

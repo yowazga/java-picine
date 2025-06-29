@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MainTest.java                                      :+:      :+:    :+:   */
+/*   UsersService.java                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/29 12:50:01 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/29 12:50:26 by Younes           ###   ########.fr       */
+/*   Created: 2025/06/28 16:28:28 by Younes            #+#    #+#             */
+/*   Updated: 2025/06/28 20:32:37 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-package school42.spring.service;
+package school42.spring.service.services;
 
-import static org.junit.jupiter.api.Assertions.*;
+public interface UsersService {
 
-import org.junit.jupiter.api.Test;
-
-public class MainTest 
-{
-    /**
-     * Rigorous Test :-)
-     */
-    @Test
-    public void shouldAnswerWithTrue()
-    {
-        assertTrue( true );
-    }
+    String signUp(String email);
 }
