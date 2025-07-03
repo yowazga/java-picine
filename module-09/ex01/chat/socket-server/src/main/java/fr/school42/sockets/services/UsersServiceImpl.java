@@ -6,7 +6,7 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 18:03:02 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/30 10:26:09 by Younes           ###   ########.fr       */
+/*   Updated: 2025/07/03 18:24:17 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ import fr.school42.sockets.repositories.UsersRepository;
 
 public class UsersServiceImpl implements UsersService {
 
-    private final UsersRepository usersRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private UsersRepository usersRepository;
+    
+    private BCryptPasswordEncoder passwordEncoder;
 
     public UsersServiceImpl(UsersRepository usersRepository) {
         
@@ -30,9 +31,16 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public void signUp(String login, String rawPassword) {
         
+        if (login == null || login.isBlank()) {
+            throw new IllegalArgumentException("Login cannot be empty");
+        }
+        if (rawPassword == null || rawPassword.isEmpty()) {
+            throw new IllegalArgumentException("Password cannot be empty");
+        }
+        
         if (usersRepository.findByLogin(login).isPresent()) {
             
-            throw new RuntimeException("User " + login + " already exists");
+            throw new IllegalArgumentException("User " + login + " already exists");
         }
 
         User user = new User(null, login, passwordEncoder.encode(rawPassword));
@@ -40,4 +48,11 @@ public class UsersServiceImpl implements UsersService {
         usersRepository.save(user);
     }
 
+    @Override
+    public User signIn(String login, String password) {
+        
+        return usersRepository.findByLogin(login)
+                .filter(user -> passwordEncoder.matches(password, user.getPassword()))
+                .orElseThrow(() -> new IllegalArgumentException("Invalid login or password"));
+    }
 }

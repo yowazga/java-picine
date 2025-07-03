@@ -6,66 +6,57 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 18:01:45 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/01 11:50:00 by Younes           ###   ########.fr       */
+/*   Updated: 2025/07/03 18:40:24 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 package fr.school42.sockets.server;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import fr.school42.sockets.services.MessagesService;
 import fr.school42.sockets.services.UsersService;
 
 public class Server {
 
-    private final UsersService usersService;
-    private final int port; 
+    private UsersService usersService;
+    private MessagesService messagesService;
+    public static List<ClientHandler> clientActive = Collections.synchronizedList(new ArrayList<>());
+
     
-    public Server(UsersService usersService, int port) {
-        
+    public Server(UsersService usersService, MessagesService messagesService) {
         this.usersService = usersService;
-        this.port = port;
+        this.messagesService = messagesService;
     }
 
-    public void start() {
+    public Server() {}
+    
+    public void start(int port) {
         
-        System.out.println("Starting server on port " + port + "...");
-        try (ServerSocket serverSocket = new ServerSocket(port);
-             Socket client = serverSocket.accept();
-             BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-             PrintWriter out = new PrintWriter(client.getOutputStream(), true)) {
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
             
-                out.println("Hello from server!");
-                String line = in.readLine();
+            System.out.println("Starting server on port " + port + "...");
+            while (true) {
                 
-                if (line != null && line.startsWith("/signUp")) {
+                try {
                     
-                    out.println("Enter username:");
-                    String login = in.readLine();
-                    out.println("Enter password:");
-                    String password = in.readLine();
-
-                    try {
-                        
-                        usersService.signUp(login, password);
-                        out.println("Successful!");
-                    } catch (Exception e) {
-                        out.println("Signup failed: " + e.getMessage());
-                    }
-                } else {
-                    out.println("Unknown command.");
+                    Socket clientSocket = serverSocket.accept();
+                    System.out.println("New client connected: " + clientSocket);
+                    
+                    clientActive.add(new ClientHandler(clientSocket, usersService, messagesService));
+                } catch (Throwable e) {
+                    
+                    System.err.println("Failed to create client listener: " + e.getMessage());
                 }
-            
+                
+            }
         } catch (IOException e) {
             e.printStackTrace();;
         }
         System.out.println("Server shutting down.");
     }
-
-    
 }
