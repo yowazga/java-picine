@@ -6,7 +6,7 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 18:05:20 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/04 16:48:27 by Younes           ###   ########.fr       */
+/*   Updated: 2025/07/08 18:09:10 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ public class SocketsApplicationConfig {
 
     @Bean
     public MessagesService messagesService() {
-        return new MessagesServiceImpl(usersRepository(), messagesRepository());
+        return new MessagesServiceImpl(usersRepository(), messagesRepository(), roomsRepository());
     }
 
     @Bean

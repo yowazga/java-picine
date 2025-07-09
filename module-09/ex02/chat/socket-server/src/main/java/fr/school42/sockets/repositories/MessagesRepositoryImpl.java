@@ -6,7 +6,7 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 09:49:23 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/05 19:46:03 by Younes           ###   ########.fr       */
+/*   Updated: 2025/07/08 19:28:20 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -41,15 +42,16 @@ public class MessagesRepositoryImpl implements MessagesRepository,  RowMapper<Me
     @Override
     public void save(Message message) {
         
-        String sql = "UPDATE messages SET from_id = ?, room_id = ?, text = ?, created_at = ? WHERE id = ?";
+        String sql = "INSERT INTO messages (user_id, text, created_at, room_id) VALUES (?, ?, ?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         
         jdbcTemplate.update(conn -> {
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, message.getSender().getId());
             stmt.setString(2, message.getMessage());
-            stmt.setObject(3, message.getTimestamp());
-            stmt.setLong(4, message.getId());
+            // stmt.setObject(3, message.getTimestamp());
+            stmt.setTimestamp(3, new Timestamp(message.getTimestamp().getTime()));
+            stmt.setLong(4, message.getRoom().getId());
             return stmt;
         }, keyHolder);
 
@@ -57,13 +59,17 @@ public class MessagesRepositoryImpl implements MessagesRepository,  RowMapper<Me
         Number id = (Number) keyHolder.getKeys().get("id");
         if (id != null) {
             message.setId(id.longValue());
-}
+        }
     }
 
     @Override
     public List<Message> findAll() {
         
-        String sql = "SELECT m.*, u.username, u.password, c.name AS room_name FROM messages m JOIN users u ON m.from_id = u.id JOIN chatrooms c ON m.room_id = c.id ORDER BY m.created_at";
+        String sql = "SELECT m.*, u.login, u.password, r.name AS room_name " +
+             "FROM messages m " +
+             "JOIN users u ON m.user_id = u.id " +
+             "JOIN rooms r ON m.room_id = r.id " +
+             "ORDER BY m.created_at";
 
         return jdbcTemplate.query(sql, this);
     }
@@ -71,7 +77,11 @@ public class MessagesRepositoryImpl implements MessagesRepository,  RowMapper<Me
     @Override
     public Message findById(Long id) {
         
-        String sql = "SELECT m.*, u.username, u.password, c.name AS room_name FROM messages m JOIN users u ON m.from_id = u.id JOIN chatrooms c ON m.room_id = c.id WHERE m.id = ?";
+        String sql = "SELECT m.*, u.login, u.password, r.name AS room_name " +
+             "FROM messages m " +
+             "JOIN users u ON m.user_id = u.id " +
+             "JOIN rooms r ON m.room_id = r.id " +
+             "WHERE m.id = ?";
         
         return jdbcTemplate.query(sql, this, id).stream().findAny().orElse(null);
     }
@@ -102,7 +112,7 @@ public class MessagesRepositoryImpl implements MessagesRepository,  RowMapper<Me
         sender.setLogin(rs.getString("login"));
         sender.setPassword(rs.getString("password"));
         
-        Room room = new Room(rs.getLong("room_id"), rs.getString("name"));
+        Room room = new Room(rs.getLong("room_id"), rs.getString("room_name"));
         
         return new Message(
             rs.getLong("id"),
@@ -116,7 +126,7 @@ public class MessagesRepositoryImpl implements MessagesRepository,  RowMapper<Me
     @Override
     public List<Message> findByRoomId(Long roomId, int limit, int offset) {
 
-        String sql = "SELECT m.*, u.username, u.password, c.name AS room_name FROM messages m JOIN users u ON m.from_id = u.id JOIN chatrooms c ON m.room_id = c.id WHERE m.room_id = ? ORDER BY m.created_at LIMIT ? OFFSET ?";
+        String sql = "SELECT m.*, u.login, u.password, r.name AS room_name FROM messages m JOIN users u ON m.user_id = u.id JOIN rooms r ON m.room_id = r.id WHERE m.room_id = ? ORDER BY m.created_at LIMIT ? OFFSET ?";
         
         return jdbcTemplate.query(sql, this, roomId, limit, offset);
     }

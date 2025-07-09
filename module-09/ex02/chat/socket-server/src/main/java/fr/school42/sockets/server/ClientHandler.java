@@ -6,7 +6,7 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 10:32:08 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/08 14:55:56 by Younes           ###   ########.fr       */
+/*   Updated: 2025/07/08 18:51:19 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ public class ClientHandler extends Thread {
     public void run() {
         
         try (BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))) {
-
             out = new PrintWriter(clientSocket.getOutputStream(), true);
+            
             Command command = new Command("response", "server", "Hello from server!");
             
             out.println(command.toJson());
@@ -98,10 +98,10 @@ public class ClientHandler extends Thread {
 
     private void signUp(BufferedReader in, PrintWriter out) throws IOException {
         
-        out.println(new Command("response", "server", "Enter username"));
+        out.println(new Command("response", "server", "Enter username").toJson());
         String username = Command.fromJson(in.readLine()).getContent();
 
-        out.println(new Command("response", "server", "Enter passwowrd"));
+        out.println(new Command("response", "server", "Enter passwowrd").toJson());
         String password = Command.fromJson(in.readLine()).getContent();
 
         User user = usersService.signUp(username, password);
@@ -122,10 +122,10 @@ public class ClientHandler extends Thread {
 
     private boolean authenticateUser(BufferedReader in, PrintWriter out) throws IOException {
         
-        out.println(new Command("response", "server", "Enter username:"));
+        out.println(new Command("response", "server", "Enter username:").toJson());
         String username = Command.fromJson(in.readLine()).getContent();
 
-        out.println(new Command("response", "server", "Enter password:"));
+        out.println(new Command("response", "server", "Enter password:").toJson());
         String password = Command.fromJson(in.readLine()).getContent();
 
         signedInUser = usersService.signIn(username, password);
@@ -169,14 +169,14 @@ public class ClientHandler extends Thread {
 
     private void createRoom(BufferedReader in, PrintWriter out) throws IOException {
         
-        out.println(new Command("response", "server", "Enter Room name:"));
+        out.println(new Command("response", "server", "Enter Room name:").toJson());
         String roomName = Command.fromJson(in.readLine()).getContent();
 
         Room room = roomsService.createRoom(roomName);
         if (room != null) {
-            out.println(new Command("response", "server", "Room created successfully!"));
+            out.println(new Command("response", "server", "Room created successfully!").toJson());
         } else {
-            out.println(new Command("response", "server", "ailed to create room"));
+            out.println(new Command("response", "server", "ailed to create room").toJson());
         }
     }
 
@@ -232,12 +232,11 @@ public class ClientHandler extends Thread {
     private void handlChat(BufferedReader in, PrintWriter out) throws IOException {
         
         while (true) {
-            
             Command command = Command.fromJson(in.readLine());
             if (command == null)
                 return ;
             if ("Exit".equalsIgnoreCase(command.getContent())) {
-                out.println(new Command("response", "server", "You have left the chat."));
+                out.println(new Command("response", "server", "You have left the chat.").toJson());
                 instanceRoom = null;
                 break ;
             }

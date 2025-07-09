@@ -6,7 +6,7 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:29:37 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/07 10:42:32 by Younes           ###   ########.fr       */
+/*   Updated: 2025/07/08 18:53:24 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ public class MessagesServiceImpl implements MessagesService{
     private RoomsRepository roomsRepository;
 
     
-    public MessagesServiceImpl(UsersRepository usersRepository, MessagesRepository messagesRepository) {
+    public MessagesServiceImpl(UsersRepository usersRepository, MessagesRepository messagesRepository, RoomsRepository roomsRepository) {
         this.usersRepository = usersRepository;
         this.messagesRepository = messagesRepository;
+        this.roomsRepository = roomsRepository;
     }
 
 
@@ -50,6 +51,8 @@ public class MessagesServiceImpl implements MessagesService{
         User user = usersRepository.findByLogin(login).orElseThrow();
 
         Room room = roomsRepository.findById(roomId);
+        
+        System.out.println(user + " " + room);
         
         Message message = new Message(user, room, text);
         messagesRepository.save(message);
