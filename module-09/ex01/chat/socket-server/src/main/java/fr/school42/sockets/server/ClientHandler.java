@@ -6,7 +6,7 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 10:32:08 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/03 17:41:20 by Younes           ###   ########.fr       */
+/*   Updated: 2025/07/04 15:45:52 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ public class ClientHandler extends Thread {
                 out.println("Error: " + e.getMessage());
                 e.printStackTrace();
             }
-            
         } catch (Exception e) {
             
             e.printStackTrace();
@@ -81,7 +80,6 @@ public class ClientHandler extends Thread {
                 System.err.println("Failed to close socket: " + e.getMessage());
             }
         }
-        
     }
 
     private User authenticateUser(BufferedReader in, PrintWriter out) throws IOException {

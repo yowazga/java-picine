@@ -6,7 +6,7 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:01:27 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/24 12:54:50 by Younes           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:19:06 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,24 @@ public class App
             
             OrmManager orm = new OrmManager(dataSource);
             orm.init( User.class);
+            
+            User user1 = new User("Younes", "Wazga", 50);
+            User user2 = new User(null, null, null);
 
-            User u = new User("Younes", "Wazga", 25);
+            orm.save(user1);
+            orm.save(user2);
+
+            User getUser_db = orm.findById(2L, User.class);
+
+            System.out.println(getUser_db);
             
-            orm.save(u);
-            
-            System.out.println("get user: " + orm.findById(1L, User.class));
+            if (getUser_db != null) {
+                getUser_db.setFirstName("newFirstname");
+                getUser_db.setLastName("newLastname");
+                getUser_db.setAge(20);
+            }
+            orm.update(getUser_db);
+            System.out.println(getUser_db);
 
         } catch (Exception e) {
             System.err.println(e);

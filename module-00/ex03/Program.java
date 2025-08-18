@@ -35,14 +35,17 @@ public class Program {
 	private static long getWeekGrades()
 	{
 		long grades = 0;
+		System.out.print("-> ");
 		String input = scanner.nextLine();
 
 		while (weeks < 18 && !input.equals("42"))
 		{
+			System.out.print("-> ");
 			if (input.equals("Week " + (weeks + 1)))
 			{
 				grades = grades * 10 + getMinGrad();
 				weeks++;
+				System.out.print("-> ");
 				input = scanner.nextLine();
 			}
 			else
@@ -62,8 +65,6 @@ public class Program {
 
         for (int i = 1; i < weeks; i++) {
             divisor *= 10;
-			System.out.println("divisor is: " + divisor);
-
         }
 
         for (int i = 0; i < weeks; i++) {

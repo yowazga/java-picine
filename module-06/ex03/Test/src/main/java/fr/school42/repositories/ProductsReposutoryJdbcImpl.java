@@ -6,7 +6,7 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 13:27:09 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/11 17:56:13 by Younes           ###   ########.fr       */
+/*   Updated: 2025/06/14 15:47:50 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ import java.util.Optional;
 
 import javax.sql.DataSource;
 
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import fr.school42.models.Product;
 

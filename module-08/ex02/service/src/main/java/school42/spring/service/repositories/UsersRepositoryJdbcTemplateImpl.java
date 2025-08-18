@@ -6,7 +6,7 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 18:44:50 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/29 11:53:32 by Younes           ###   ########.fr       */
+/*   Updated: 2025/06/29 18:55:17 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository, RowMapp
             stmt.setString(1, entity.getEmail());
             return stmt;
         }, keyHolder);
+        
         if (keyHolder.getKey() != null) {
             entity.setId(keyHolder.getKey().longValue());
         }

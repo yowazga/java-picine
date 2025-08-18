@@ -33,8 +33,7 @@ public class EmbeddedDataSourceTest {
         
         this.dataSource = new EmbeddedDatabaseBuilder()
                               .setType(EmbeddedDatabaseType.HSQL)
-                              .addScript("Schema.sql")
-                              .addScript("data.sql")
+                              .addScripts("Schema.sql", "data.sql")
                               .build();
     }
 

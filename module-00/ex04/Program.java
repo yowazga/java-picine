@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Program.java                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 13:28:34 by yowazga           #+#    #+#             */
-/*   Updated: 2024/09/04 19:56:52 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/08/09 13:16:06 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ public class Program {
 	}
 	
 	public static void main(String[] args) {
+		System.out.print("-> ");
 		String input = scanner.nextLine();
 		
 		short[] countChars = getFrequency(input);

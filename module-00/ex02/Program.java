@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Program.java                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 19:05:14 by yowazga           #+#    #+#             */
-/*   Updated: 2024/07/02 14:26:26 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/08/07 19:05:43 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ public class Program {
 		int num = 0; 
 
 		while (true) {
+			System.out.print("-> ");
 			num = input.nextInt();
 			if (num == 42)
 				break ;

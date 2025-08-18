@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Program.java                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:40:57 by yowazga           #+#    #+#             */
-/*   Updated: 2024/07/02 16:48:40 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/08/07 19:01:27 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ public class Program {
 	public static void main(String[] args)
 	{
 		Scanner input = new Scanner(System.in);
-		System.out.println("Inter a number");
+		System.out.print("-> ");
 
 	
 		int num = input.nextInt();

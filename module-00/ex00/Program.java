@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   Program.java                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:21:09 by yowazga           #+#    #+#             */
-/*   Updated: 2024/07/01 20:27:21 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/08/07 15:56:35 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// package ex00;
 
 public class Program {
 	public static void main(String[] arg)
