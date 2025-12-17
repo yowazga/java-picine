@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Program.java                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
+/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 16:27:43 by yowazga           #+#    #+#             */
-/*   Updated: 2025/12/17 10:51:44 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/17 14:33:26 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ public class Program {
 	private Attribute blackColor = Attribute.BLACK_BACK();
 
 	@Parameter(names = {"-r", "--resource"}, description = "Resource name, (should be in resources folder)", order = 1, validateWith = ResourceNameValidator.class)
-	private String resourceName = "image.bmp";
+	private String resourceName = "resources/image.bmp";
 
 	public static JCommander jcommander;
 
