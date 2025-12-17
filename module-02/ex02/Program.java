@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Program.java                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:10:42 by yowazga           #+#    #+#             */
-/*   Updated: 2024/11/07 22:08:16 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/16 10:54:21 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ public class Program {
 				System.err.println("Error: " + e.getMessage());
 			}
 		}
+		scanner.close();
 	}
 	
 	public static void main(String[] args) {

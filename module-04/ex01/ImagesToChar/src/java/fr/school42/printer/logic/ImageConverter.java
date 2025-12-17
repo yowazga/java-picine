@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ImageConverter.java                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 16:31:10 by yowazga           #+#    #+#             */
-/*   Updated: 2025/03/26 15:05:03 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/17 10:23:07 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@ package fr.school42.printer.logic;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;

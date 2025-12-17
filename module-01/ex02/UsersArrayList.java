@@ -6,14 +6,14 @@
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 12:16:31 by yowazga           #+#    #+#             */
-/*   Updated: 2024/09/12 09:05:11 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/15 11:44:42 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 public class UsersArrayList implements UsersList {
 
-	User users[];
-	Integer sizeUsers;
+	private User users[];
+	private Integer sizeUsers;
 
 	public UsersArrayList() {
 		this.users = new User[10];

@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   FileDownloader.java                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 14:05:34 by yowazga           #+#    #+#             */
-/*   Updated: 2025/03/21 00:39:39 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/16 16:02:06 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-import java.io.IOError;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;

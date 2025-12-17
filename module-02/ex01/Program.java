@@ -6,7 +6,7 @@
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 16:48:21 by yowazga           #+#    #+#             */
-/*   Updated: 2024/10/16 15:38:31 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/16 10:39:38 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ public class Program {
 
 		writeDictionary(dictionary, "dictionary.txt");
 
-		System.out.printf("Cosine similarity: %.4f\n", similarity);
+		System.out.printf("Cosine similarity: %.3f\n", similarity);
 
 	}
 }

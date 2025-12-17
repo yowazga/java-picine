@@ -6,7 +6,7 @@
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 20:52:52 by yowazga           #+#    #+#             */
-/*   Updated: 2024/09/16 20:43:52 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/15 12:08:25 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ public class TransactionsService {
 								: this.usersList.getUserById(trToDelete.getRecipient().getId());
 		
 		if (this.unpairedTransactions.getTransactionById(transactionId) != null) {
-		System.out.println("check here");
 
 			this.unpairedTransactions.removeTransactionById(transactionId);
 		} else {

@@ -26,3 +26,4 @@ Run the following command to compile the Java source files:
 Use the following command to run the program:
 		java -cp target fr.school42.printer.app.Program <image_path> <black_char> <white_char>
 Example: java -cp target fr.school42.printer.app.Program /path/to/image.bmp 0 .
+note: -cp means : --classpath

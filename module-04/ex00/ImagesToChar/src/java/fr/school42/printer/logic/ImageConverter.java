@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ImageConverter.java                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 16:31:10 by yowazga           #+#    #+#             */
-/*   Updated: 2025/03/23 15:15:18 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/17 10:03:54 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,14 @@ public class ImageConverter {
 	private void validateImageFile(String filePath) {
 		
 		File file = new File(filePath);
-		if (!file.exists() || file.canRead()) {
+		if (!file.exists() || !file.canRead()) {
 			throw new IllegalArgumentException("The image file does not exist or cannot be read.");
 		}
 	}
 	
 	public char[][] convertImage(String imagePath) {
 		
+		validateImageFile(imagePath);
 		
 		File file = new File(imagePath);
 		

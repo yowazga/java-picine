@@ -6,7 +6,7 @@
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 09:40:56 by yowazga           #+#    #+#             */
-/*   Updated: 2024/10/14 14:24:32 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/16 09:39:29 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ import java.util.*;
 public class FileSignatureAnalyzer implements SignatureAnalyze {
 
 	private Map<String, String> signatures = new TreeMap<>(new LengthComparator());
-	private int maxSigBytes;
+	private int maxSigBytes = 0;
 
 	public FileSignatureAnalyzer(String signaturesPath) throws IOException {
 		loadSignatures(signaturesPath);
@@ -45,15 +45,18 @@ public class FileSignatureAnalyzer implements SignatureAnalyze {
 			File file = new File(filePath);
 			String fileType = "UNDEFINED";
 			if (!file.exists() || !file.isFile() || !file.canRead()) {
+				System.out.println("Error: Cannot access file " + filePath);
 				return fileType;
 			}
+			
 			FileInputStream fis = new FileInputStream(filePath);
 			byte[] magicBytes = new byte[maxSigBytes];
-			for (int i = 0; i < magicBytes.length; i++)
-				System.out.println(magicBytes[i]);
+			// for (int i = 0; i < magicBytes.length; i++)
+			// 	System.out.println(magicBytes[i]);
 			fis.read(magicBytes);
 			String magicBytesHex = bytesToHex(magicBytes);
 
+			System.out.println("Magic Bytes: " + magicBytesHex);
 			for (String key : signatures.keySet()) {
 				if (key.equals(magicBytesHex.substring(0, key.length()))) {
 					fileType = signatures.get(key);
