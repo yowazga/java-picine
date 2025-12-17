@@ -52,6 +52,13 @@ javac -cp target -d target ./src/java/fr/school42/printer/**/*.java
 jar cvfm target/images-to-chars-printer.jar src/manifest.txt -C target .
 ```
 
+jar: tool to create Java archives.
+c: create a new JAR.
+v: verbose (list files as they’re added).
+f: specify JAR file name (target/images-to-chars-printer.jar).
+m: use src/manifest.txt as the manifest (which contains Main-Class: fr.school42.printer.app.Program).
+-C target .: change to directory target and add everything under it into the JAR.
+
 4. Run the application:
 
 ```zsh

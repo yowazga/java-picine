@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ImageConverter.java                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 16:31:10 by yowazga           #+#    #+#             */
-/*   Updated: 2025/04/07 12:55:15 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/17 14:37:28 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,8 @@ public class ImageConverter {
 		try {
 			// Try loading from resources first
 			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourceName);
-			
-			// If not found in resources, try as a file
 			if (inputStream == null) {
-				File file = new File(resourceName);
-				if (file.exists()) {
-					inputStream = file.toURI().toURL().openStream();
-				} else {
-					throw new IllegalArgumentException("Resource " + resourceName + " not found in classpath or as file.");
-				}
+				throw new IllegalArgumentException("Resource " + resourceName + " not found in classpath.");
 			}
 			
 			BufferedImage image = ImageIO.read(inputStream);
@@ -52,14 +45,14 @@ public class ImageConverter {
 				throw new IllegalArgumentException("Failed to read the image. Make sure it's a valid BMP file.");
 			}
 			
-			char[][] arrayChar = new char[image.getWidth()][image.getHeight()];
+			char[][] arrayChar = new char[image.getHeight()][image.getWidth()];
 			
 			for (int y = 0; y < image.getHeight(); y++) {
 				for (int x = 0; x < image.getWidth(); x++) {
 					int rgb = image.getRGB(x, y);
 					Color color = new Color(rgb);
 					int grayscale = (color.getRed() + color.getGreen() + color.getBlue()) / 3;
-					arrayChar[x][y] = grayscale < 128 ? this.BLACK : this.WHITE;
+					arrayChar[y][x] = grayscale < 128 ? this.BLACK : this.WHITE;
 				}
 			}
 			return arrayChar;
