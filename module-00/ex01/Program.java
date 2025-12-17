@@ -6,7 +6,7 @@
 /*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/30 18:40:57 by yowazga           #+#    #+#             */
-/*   Updated: 2025/08/07 19:01:27 by Younes           ###   ########.fr       */
+/*   Updated: 2025/09/05 15:49:13 by Younes           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ public class Program {
 	{
 		Scanner input = new Scanner(System.in);
 		System.out.print("-> ");
-
 	
 		int num = input.nextInt();
 		if (num <= 1)
