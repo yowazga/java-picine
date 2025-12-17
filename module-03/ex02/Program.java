@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Program.java                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yowazga <yowazga@student.1337.ma>          +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 17:28:13 by yowazga           #+#    #+#             */
-/*   Updated: 2025/03/03 15:21:00 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/17 11:25:25 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ public class Program {
 			threads[i] = new SumThread(array, start, end);
 			threads[i].start();
 		}
+		
 		int totalSum = 0;
 		for (SumThread thread : threads) {
 			try {
