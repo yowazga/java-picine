@@ -1,8 +1,8 @@
 -- Drop tables in reverse order of dependencies
-DROP TABLE IF EXISTS messages;
-DROP TABLE IF EXISTS user_chatrooms;
-DROP TABLE IF EXISTS chatrooms;
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS messages CASCADE;
+DROP TABLE IF EXISTS user_chatrooms CASCADE;
+DROP TABLE IF EXISTS chatrooms CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY ,

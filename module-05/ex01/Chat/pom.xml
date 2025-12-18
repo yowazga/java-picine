@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>22</maven.compiler.source>
-        <maven.compiler.target>22</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -40,16 +40,30 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.5.0</version>
-                <configuration>
-                    <mainClass>fr.school42.chat.app.Program</mainClass>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <configuration>
+                <mainClass>fr.school42.chat.app.Program</mainClass>
+                <stdin>stdin</stdin>
+            </configuration>
+        </plugin>
+        <plugin>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.13.0</version>
+        </plugin>
+    </plugins>
+</build>
 
 </project>
+<!-- 
+mvnd compile
+mvnd dependency:build-classpath -Dmdep.outputFile=cp.txt
+java -cp "target/classes:$(cat cp.txt)" fr.school42.chat.app.Program -->
+
+<!-- docker exec -it <container_name> psql -U postgres -->
+
+<!-- docker run - -name my_postgres -d -e POSTGRES_PASSWORD=12345 -v my_pgdata:/var/lib/postgresql/data -p 5432:5432 postgresCopied!    -->
+

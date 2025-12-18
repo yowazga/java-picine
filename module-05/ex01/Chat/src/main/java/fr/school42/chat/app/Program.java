@@ -10,20 +10,20 @@ import fr.school42.chat.repositories.MessagesRepositoryJdbcImpl;
 
 public class Program {
 
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/mydb";
-    private static final String DB_USERNAME = "yowazga";
-    private static final String DB_PASSWORD = "yowazga";
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String DB_USERNAME = "postgres";
+    private static final String DB_PASSWORD = "12345";
 
     static Long readId() {
 
         Scanner scanner = new Scanner(System.in);
+        
         System.out.println("Enter a message ID");
+        System.out.print("-> ");
         if (!scanner.hasNextLong()) {
             System.exit(1);
         }
-        Long id = scanner.nextLong();
-        scanner.close();
-        return id;
+        return scanner.nextLong();
     }
     
     public static void main(String[] args) throws SQLException {
@@ -39,8 +39,6 @@ public class Program {
             final Long id = readId();
 
             messagesRepository.findById(id).ifPresent(System.out::println);
-            dataSource.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
