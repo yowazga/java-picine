@@ -3,32 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   Main.java                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:42:26 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/28 14:41:24 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 10:05:47 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 package school42.spring.service.application;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import school42.spring.service.config.ApplicationConfig;
+import school42.spring.service.models.User;
 import school42.spring.service.repositories.UsersRepository;
-import school42.spring.service.repositories.UsersRepositoryJdbcImpl;
-import school42.spring.service.repositories.UsersRepositoryJdbcTemplateImpl;
+import school42.spring.service.services.UsersService;
 
 public class Main 
 {
     public static void main( String[] args ) {
-        try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("context.xml")) {
+        
+        ApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
+        try  {
             
-            UsersRepository repo1 = context.getBean("usersRepositoryJdbc", UsersRepositoryJdbcImpl.class);
-            System.out.println("=== JDBC Impl ===");
-            repo1.findAll().forEach(System.out::println);
-    
-            UsersRepository repo2 = context.getBean("UsersRepositoryJdbcTemplateImpl", UsersRepositoryJdbcTemplateImpl.class);
-            System.out.println("=== JdbcTemplate Impl ===");
-            repo2.findAll().forEach(System.out::println);
+           UsersService usersService = context.getBean("usersServiceImpl", UsersService.class);
+           UsersRepository usersRepository = context.getBean("usersRepositoryJdbcTemplate", UsersRepository.class);
+
+           String pass = usersService.signUp("test@signup.com");
+           System.out.println("Signup completed with password: " + pass);
+           
+           usersRepository.findByEmail("test@signup.com").ifPresent((User user) -> {
+               System.out.println("User found: " + user.getEmail() + " " + user.getPassword());
+           });
+            
+        }
+        finally {
+            ((AnnotationConfigApplicationContext) context).close();
         }
         
     }

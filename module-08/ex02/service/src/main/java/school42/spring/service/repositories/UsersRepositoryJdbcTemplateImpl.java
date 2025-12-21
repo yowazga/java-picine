@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   UsersRepositoryJdbcTemplateImpl.java               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/27 18:44:50 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/29 18:55:17 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 10:01:04 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,30 @@ import java.util.Optional;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.lang.NonNull;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import school42.spring.service.models.User;
 
-@Repository
+@Component("usersRepositoryJdbcTemplate")
 public class UsersRepositoryJdbcTemplateImpl implements UsersRepository, RowMapper<User>{
 
     private final JdbcTemplate jdbcTemplate;
 
-    public UsersRepositoryJdbcTemplateImpl(DataSource dataSource) {
+    public UsersRepositoryJdbcTemplateImpl(@Qualifier("driverManagerDataSource") DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
     @Override
     public User mapRow(@NonNull ResultSet rs, int rowNum) throws SQLException {
         return new User(
                     rs.getLong("id"),
-                    rs.getString("email")
+                    rs.getString("email"),
+                    rs.getString("password")
                 );
     }
     
@@ -67,12 +69,13 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository, RowMapp
     @Override
     public void save(User entity) {
        
-        String sql = "INSERT INTO users (email) VALUES (?)";
+        String sql ="INSERT INTO users (email, password) VALUES (?, ?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(connection -> {
             PreparedStatement stmt = connection.prepareStatement(sql, new String[]{"id"});
             stmt.setString(1, entity.getEmail());
+            stmt.setString(2, entity.getPassword());
             return stmt;
         }, keyHolder);
         
@@ -84,9 +87,9 @@ public class UsersRepositoryJdbcTemplateImpl implements UsersRepository, RowMapp
     @Override
     public void update(User entity) {
         
-        String sql = "UPDATE users SET email = ? WHERE id = ?";
+        String sql = "UPDATE users SET email = ?, password = ? WHERE id = ?";
 
-        jdbcTemplate.update(sql, entity.getEmail(), entity.getId());
+        jdbcTemplate.update(sql, entity.getEmail(),entity.getPassword(), entity.getId());
     }
 
     @Override

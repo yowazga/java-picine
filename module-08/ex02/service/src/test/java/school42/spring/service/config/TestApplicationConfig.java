@@ -3,48 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   TestApplicationConfig.java                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 16:30:00 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/29 12:20:42 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 11:00:42 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 package school42.spring.service.config;
 
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import javax.sql.DataSource;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
-import java.sql.Statement;
-import java.sql.Connection;
-
-import org.h2.jdbcx.JdbcDataSource;
+import school42.spring.service.repositories.UsersRepository;
+import school42.spring.service.services.UsersService;
+import school42.spring.service.services.UsersServiceImpl;
 
 @Configuration
 @ComponentScan("school42.spring.service")
 public class TestApplicationConfig {
 
 
+    @Bean(name = {"hikariDataSource", "driverManagerDataSource"})
+    public DataSource dataSource() {
+        return new EmbeddedDatabaseBuilder()
+            .setType(EmbeddedDatabaseType.HSQL )
+            .addScript("classpath:schema.sql")
+            .addScript("classpath:data.sql")
+            .build();
+    }
+
     @Bean
-    public JdbcDataSource dataSource() {
-        
-        JdbcDataSource dataSource = new JdbcDataSource();
-
-        dataSource.setURL("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1");
-        dataSource.setUser("test");
-        dataSource.setPassword("");
-
-        try (Connection conn = dataSource.getConnection();
-            Statement stmt = conn.createStatement()) {
-
-                stmt.execute("CREATE TABLE users (id BIGINT AUTO_INCREMENT PRIMARY KEY, email VARCHAR(255))");
-            
-        } catch (Exception e) {
-            
-            throw new RuntimeException("Failed to initialize test DB", e);
-        }
-        return dataSource;
-    } 
+    public UsersService usersService(@Qualifier("usersRepositoryJdbc") UsersRepository usersRepository) {
+        return new UsersServiceImpl(usersRepository);
+    }
 }

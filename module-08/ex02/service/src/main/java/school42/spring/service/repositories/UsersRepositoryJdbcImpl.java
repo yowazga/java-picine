@@ -3,33 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   UsersRepositoryJdbcImpl.java                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 15:26:35 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/27 18:41:05 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 10:01:26 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 package school42.spring.service.repositories;
 
-import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import school42.spring.service.models.User;
 
+@Component("usersRepositoryJdbc")
 public class UsersRepositoryJdbcImpl implements UsersRepository {
 
     private final DataSource dataSource;
 
-    public UsersRepositoryJdbcImpl(DataSource dataSource) {
+    public UsersRepositoryJdbcImpl(@Qualifier("hikariDataSource") DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
@@ -45,7 +49,8 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
                 ResultSet rs = stmt.executeQuery();
                 if (rs.next()) {
                     String email = rs.getString("email");
-                    User user = new User(id, email);
+                    String password = rs.getString("password");
+                    User user = new User(id, email, password);
                     return user;
                 }
                 return null;
@@ -68,7 +73,8 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
             while (rs.next()) {
                 Long id = rs.getLong("id");
                 String email = rs.getString("email");
-                users.add(new User(id, email));
+                String password = rs.getString("password");
+                users.add(new User(id, email, password));
             }
             
         } catch (SQLException e) {
@@ -81,16 +87,17 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
     @Override
     public void save(User entity) {
         
-        String sql = "INSERT INTO users (email) VALUES (?)";
+        String sql = "INSERT INTO users (email, password) VALUES (?, ?)";
 
         try (Connection conn = dataSource.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
                 stmt.setString(1, entity.getEmail());
+                stmt.setString(2, entity.getPassword());
                 stmt.executeUpdate();
                 
                 ResultSet key = stmt.getGeneratedKeys();
                 if (key.next()) {
-                    entity.setId(key.getLong("id"));;
+                    entity.setId(key.getLong("id"));
                 }
             
         } catch (SQLException e) {
@@ -101,12 +108,13 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
     @Override
     public void update(User entity) {
         
-        String sql = "UPDATE users SET email = ? WHERE id = ?";
+        String sql = "UPDATE users SET email = ?, password = ? WHERE id = ?";
         
         try (Connection conn = dataSource.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
                 
                 stmt.setString(1, entity.getEmail());
+                stmt.setString(2, entity.getPassword());
                 stmt.setLong(2, entity.getId());
 
                 stmt.executeUpdate();
@@ -150,8 +158,9 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
                 if (rs.next()) {
                     Long id = rs.getLong("id");
                     String newEmail = rs.getString("email");
+                    String password = rs.getString("password");
                     
-                    return Optional.of(new User(id, newEmail));
+                    return Optional.of(new User(id, newEmail, password));
                 }
             
                 return Optional.empty();

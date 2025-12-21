@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MessagesRepositoryJdbcImpl.java                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 13:29:30 by Younes            #+#    #+#             */
-/*   Updated: 2025/05/16 16:52:28 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/18 18:14:12 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@ package fr.school42.chat.repositories;
 
 import java.sql.Statement;
 import java.sql.Timestamp;
-// import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

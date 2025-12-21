@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   User.java                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 14:44:19 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/26 14:46:18 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 09:31:09 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ public class User {
 
     private Long id;
     private String email;
+    private String password;
     
     public Long getId() {
         return id;
@@ -29,13 +30,30 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
     
     public User() {
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
     
     public User(Long id, String email) {
         this.id = id;
         this.email = email;
+    }
+
+    public User(Long id, String email, String password) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
     }
     @Override
     public String toString() {

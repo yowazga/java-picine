@@ -12,9 +12,9 @@ import fr.school42.chat.repositories.MessagesRepositoryJdbcImpl;
 
 public class Program {
 
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/mydb";
-    private static final String DB_USERNAME = "yowazga";
-    private static final String DB_PASSWORD = "yowazga";
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String DB_USERNAME = "postgres";
+    private static final String DB_PASSWORD = "12345";
     
     public static void main(String[] args) throws SQLException {
 
@@ -36,13 +36,10 @@ public class Program {
             message.setAuthor(author);
             message.setChatroom(room);
             message.setCreatedAt(LocalDateTime.now());
-            message.setText("how are you ");
+            message.setText("my name is younes!");
 
             messagesRepository.save(message);
             System.out.println("Saved message with ID: " + message.getId());
-
-            dataSource.close();
-
         } catch (Exception e) {
             System.err.println("Validation error: " + e.getMessage());
         }

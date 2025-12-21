@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   OrmManager.java                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:38:45 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/24 12:59:40 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/20 16:27:51 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ public class OrmManager {
     public OrmManager(DataSource dataSource) {
         try {
             this.connection = dataSource.getConnection();
-        } catch (Throwable e) {
+        } catch (SQLException e) {
             throw new RuntimeException("Failed to initialize ORM", e);
         }
     }

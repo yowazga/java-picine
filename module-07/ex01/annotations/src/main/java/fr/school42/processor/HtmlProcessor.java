@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HtmlProcessor.java                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 12:17:50 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/22 16:29:02 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/20 10:56:59 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ import fr.school42.annotations.HtmlInput;
     "fr.school42.annotations.HtmlForm",
     "fr.school42.annotations.HtmlInput"
 })
-@SupportedSourceVersion(SourceVersion.RELEASE_21)
+@SupportedSourceVersion(SourceVersion.RELEASE_17)
 public class HtmlProcessor extends AbstractProcessor{
 
     @Override

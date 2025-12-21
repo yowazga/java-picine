@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   App.java                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:01:27 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/24 14:19:06 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/20 16:39:09 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 package fr.school42;
+
+import java.sql.SQLException;
 
 import org.sqlite.SQLiteDataSource;
 
@@ -47,7 +49,7 @@ public class App
             orm.update(getUser_db);
             System.out.println(getUser_db);
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println(e);
         }
       

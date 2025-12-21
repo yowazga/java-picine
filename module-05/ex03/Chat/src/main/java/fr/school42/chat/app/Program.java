@@ -12,9 +12,9 @@ import fr.school42.chat.repositories.MessagesRepositoryJdbcImpl;
 
 public class Program {
 
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/mydb";
-    private static final String DB_USERNAME = "yowazga";
-    private static final String DB_PASSWORD = "yowazga";
+    private static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
+    private static final String DB_USERNAME = "postgres";
+    private static final String DB_PASSWORD = "12345";
     
     public static void main(String[] args) throws SQLException {
 
@@ -26,14 +26,14 @@ public class Program {
 
             MessagesRepository messagesRepository = new MessagesRepositoryJdbcImpl(dataSource);
 
-            Optional<Message> optionalMessage = messagesRepository.findById(9L);
+            Optional<Message> optionalMessage = messagesRepository.findById(6L);
 
             if (optionalMessage.isPresent()) {
 
                 Message message = optionalMessage.get();
 
-                message.setText("Updated text in nighn");
-                message.setCreatedAt(LocalDateTime.now());
+                message.setText("now let's check this one");
+                message.setCreatedAt(null);
                 messagesRepository.update(message);
 
                 System.out.println("Message update successfully");

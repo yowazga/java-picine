@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HtmlForm.java                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 18:58:44 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/22 16:32:48 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/20 12:54:08 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
 import java.lang.annotation.ElementType;
 
 @Retention(RetentionPolicy.SOURCE)
-@Target(ElementType.TYPE)
+@Target(ElementType.TYPE) // class interface enum
 public @interface HtmlForm {
 
     String fileName();

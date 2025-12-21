@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Product.java                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 11:25:55 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/09 01:09:15 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/20 09:05:31 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,12 @@ public class Product {
        
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        hash = 67 * hash + Objects.hashCode(this.name);
-        hash = 67 * hash + Objects.hashCode(this.price);
-        return hash;
+        // int hash = 5;
+        // hash = 67 * hash + Objects.hashCode(this.id);
+        // hash = 67 * hash + Objects.hashCode(this.name);
+        // hash = 67 * hash + Objects.hashCode(this.price);
+        // return hash;
+        return Objects.hash(id, name, price);
     }
 
     @Override
