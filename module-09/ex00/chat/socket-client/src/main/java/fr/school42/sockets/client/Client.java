@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.java                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 11:39:44 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/01 14:09:31 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 11:22:10 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ public class Client {
                         break;
                     }
                 }
-
-                
             
         } catch (IOException e) {
             System.err.println("The server is not available!");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClientHandler.java                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 10:32:08 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/04 15:45:52 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 17:28:42 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,12 @@ public class ClientHandler extends Thread {
                 }
             } catch (Exception e) {
                 out.println("Error: " + e.getMessage());
-                e.printStackTrace();
             }
         } catch (Exception e) {
-            
+            out.println("Error: " + e.getMessage());
             e.printStackTrace();
         } finally {
             Server.clientActive.remove(this);
-
             try {
                 clientSocket.close();
             } catch (IOException e) {

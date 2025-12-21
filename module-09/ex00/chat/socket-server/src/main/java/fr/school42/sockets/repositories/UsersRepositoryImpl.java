@@ -3,38 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   UsersRepositoryImpl.java                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 18:04:06 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/01 12:18:39 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 14:11:53 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 package fr.school42.sockets.repositories;
 
-import java.sql.Statement; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
-import javax.sql.DataSource;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Repository;
 
 import fr.school42.sockets.models.User;
 
+@Repository
 public class UsersRepositoryImpl implements UsersRepository, RowMapper<User> {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public UsersRepositoryImpl(DataSource dataSource) {
+    public UsersRepositoryImpl(JdbcTemplate jdbcTemplate) {
         
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override

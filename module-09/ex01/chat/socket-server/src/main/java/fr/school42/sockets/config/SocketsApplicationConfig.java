@@ -3,77 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   SocketsApplicationConfig.java                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 18:05:20 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/03 18:40:02 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 16:52:50 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 package fr.school42.sockets.config;
 
 import javax.sql.DataSource;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import fr.school42.sockets.repositories.MessagesRepository;
-import fr.school42.sockets.repositories.MessagesRepositoryImpl;
-import fr.school42.sockets.repositories.UsersRepository;
-import fr.school42.sockets.repositories.UsersRepositoryImpl;
-import fr.school42.sockets.server.Server;
-import fr.school42.sockets.services.MessagesService;
-import fr.school42.sockets.services.MessagesServiceImpl;
-import fr.school42.sockets.services.UsersService;
-import fr.school42.sockets.services.UsersServiceImpl;
 
 @Configuration
-@PropertySource("db.properties")
+@ComponentScan("fr.school42.sockets")
+@PropertySource("classpath:db.properties")
 public class SocketsApplicationConfig {
 
-    @Autowired
-    private Environment env;
+    @Value("${db.url}")
+    private String dbUrl;
 
+    @Value("${db.user}")
+    private String dbUser;
+
+    @Value("${db.password}")
+    private String dbPassword;
+
+    @Value("${db.driver.name}")
+    private String dbDriverName;
+
+    
     @Bean
-    public DataSource dataSource() {
-        
-        HikariDataSource dataSource = new HikariDataSource();
-
-        dataSource.setJdbcUrl(env.getProperty("db.url"));
-        dataSource.setUsername(env.getProperty("db.user"));
-        dataSource.setPassword(env.getProperty("db.password"));
-        dataSource.setDriverClassName(env.getProperty("db.driver.name"));
-
-        return dataSource;
+    public HikariConfig hikariConfig() {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(dbUrl);
+        config.setUsername(dbUser);
+        config.setPassword(dbPassword);
+        config.setDriverClassName(dbDriverName);
+        return config;
     }
 
     @Bean
-    public UsersRepository usersRepository() {
-        
-        return new UsersRepositoryImpl(dataSource());
+    public DataSource hikariDataSource() {
+        return new HikariDataSource(hikariConfig());
     }
 
     @Bean
-    public UsersService usersService() {
-
-        return new UsersServiceImpl(usersRepository());
-    }
-
-    @Bean
-    public MessagesRepository messagesRepository() {
-        return new MessagesRepositoryImpl(dataSource());
-    }
-
-    @Bean
-    public MessagesService messagesService() {
-        return new MessagesServiceImpl(usersRepository(), messagesRepository());
-    }
-
-    @Bean
-    public Server server() {
-        
-        return new Server(usersService(), messagesService());
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

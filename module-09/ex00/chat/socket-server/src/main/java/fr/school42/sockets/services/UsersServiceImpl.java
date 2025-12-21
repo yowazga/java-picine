@@ -3,24 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   UsersServiceImpl.java                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 18:03:02 by Younes            #+#    #+#             */
-/*   Updated: 2025/06/30 10:26:09 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 14:28:26 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 package fr.school42.sockets.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import fr.school42.sockets.models.User;
 import fr.school42.sockets.repositories.UsersRepository;
 
+@Service
 public class UsersServiceImpl implements UsersService {
 
     private final UsersRepository usersRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
     public UsersServiceImpl(UsersRepository usersRepository) {
         
         this.usersRepository = usersRepository;

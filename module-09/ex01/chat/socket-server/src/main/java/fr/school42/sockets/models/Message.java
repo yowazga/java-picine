@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Message.java                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 18:31:48 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/03 16:49:28 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 16:54:02 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ public class Message {
     }
 
     public Message(Long id, User sender, String message, Date timestamp) {
+        this.id = id;
+        this.sender = sender;
+        this.message = message;
+        this.sentDate = timestamp;
+    }
+    
+    public Message(User sender, String message, Date timestamp) {
         this.id = id;
         this.sender = sender;
         this.message = message;

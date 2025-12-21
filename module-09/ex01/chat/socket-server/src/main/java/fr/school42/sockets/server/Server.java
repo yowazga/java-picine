@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.java                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 18:01:45 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/03 18:40:24 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 17:34:21 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,18 @@ import java.util.Collections;
 import java.util.List;
 import fr.school42.sockets.services.MessagesService;
 import fr.school42.sockets.services.UsersService;
+import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 
+@Component
 public class Server {
 
+    @Autowired
     private UsersService usersService;
+
+    @Autowired
     private MessagesService messagesService;
     public static List<ClientHandler> clientActive = Collections.synchronizedList(new ArrayList<>());
-
-    
-    public Server(UsersService usersService, MessagesService messagesService) {
-        this.usersService = usersService;
-        this.messagesService = messagesService;
-    }
 
     public Server() {}
     
@@ -55,7 +55,7 @@ public class Server {
                 
             }
         } catch (IOException e) {
-            e.printStackTrace();;
+            System.err.println("Failed to start server: " + e.getMessage());
         }
         System.out.println("Server shutting down.");
     }

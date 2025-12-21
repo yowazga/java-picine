@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Main.java                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 17:54:11 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/02 16:04:30 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 14:26:20 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ import com.beust.jcommander.Parameters;
 
 import fr.school42.sockets.config.SocketsApplicationConfig;
 import fr.school42.sockets.server.Server;
-import fr.school42.sockets.services.UsersService;
 
 @Parameters(separators = "=")
 public class Main 
@@ -44,15 +43,10 @@ public class Main
     
         try (AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(SocketsApplicationConfig.class)) {
-                    
-            UsersService usersService = context.getBean(UsersService.class);
 
-            Server server = new Server(usersService, port);
+            Server server = context.getBean(Server.class);
 
-            server.start();
-            // UsersRepository usersRepository = context.getBean(UsersRepository.class);
-
-            // usersRepository.save(new User(null, "yowazga", "ab1234"));
+            server.start(port);
         }
         
         

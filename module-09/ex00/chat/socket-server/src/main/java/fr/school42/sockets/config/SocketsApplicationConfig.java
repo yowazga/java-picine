@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   SocketsApplicationConfig.java                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 18:05:20 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/01 12:11:45 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/21 14:10:26 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,52 @@ package fr.school42.sockets.config;
 
 import javax.sql.DataSource;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-
-import fr.school42.sockets.repositories.UsersRepository;
-import fr.school42.sockets.repositories.UsersRepositoryImpl;
-import fr.school42.sockets.services.UsersServiceImpl;
 
 @Configuration
 @PropertySource("db.properties")
+@ComponentScan(basePackages = "fr.school42.sockets")
 public class SocketsApplicationConfig {
 
-    @Autowired
-    private Environment env;
+    @Value("${db.url}")
+    private String dbUrl;
+
+    @Value("${db.user}")
+    private String dbUser;
+
+    @Value("${db.password}")
+    private String dbPassword;
+
+    @Value("${db.driver.name}")
+    private String dbDriverClassName;
 
     @Bean
     public DataSource dataSource() {
-        
-        HikariDataSource dataSource = new HikariDataSource();
-
-        dataSource.setJdbcUrl(env.getProperty("db.url"));
-        dataSource.setUsername(env.getProperty("db.user"));
-        dataSource.setPassword(env.getProperty("db.password"));
-        dataSource.setDriverClassName(env.getProperty("db.driver.name"));
-
-        return dataSource;
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(dbUrl);
+        config.setUsername(dbUser);
+        config.setPassword(dbPassword);
+        config.setDriverClassName(dbDriverClassName);
+        return new HikariDataSource(config);
     }
 
     @Bean
-    public UsersRepository usersRepository() {
-        
-        return new UsersRepositoryImpl(dataSource());
+    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
     }
 
     @Bean
-    public UsersServiceImpl usersServiceImpl() {
-
-        return new UsersServiceImpl(usersRepository());
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
