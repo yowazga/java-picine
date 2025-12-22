@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS users;
 
 DROP TABLE IF EXISTS messages;
 
-DROP TABLE IF EXISTS chatrooms;
+DROP TABLE IF EXISTS rooms;
 
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
     last_room_id BIGINT
 );
 
-CREATE TABLE IF NOT EXISTS chatrooms (
+CREATE TABLE IF NOT EXISTS rooms (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
@@ -23,5 +23,5 @@ CREATE TABLE IF NOT EXISTS messages (
     room_id BIGINT NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (room_id) REFERENCES chatrooms (id)
+    FOREIGN KEY (room_id) REFERENCES rooms (id)
 );

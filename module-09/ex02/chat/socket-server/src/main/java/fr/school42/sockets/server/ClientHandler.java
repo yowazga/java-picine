@@ -6,7 +6,7 @@
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 10:32:08 by Younes            #+#    #+#             */
-/*   Updated: 2025/12/22 10:35:48 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/22 11:57:32 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ public class ClientHandler extends Thread {
 
         User user = usersService.signUp(username, password);
         if (user != null) {
-            out.println(new Command("response", "server", "uccessful!"));
+            out.println(new Command("response", "server", "Successful!").toJson());
         } else {
-            out.println(new Command("response", "error", "Registration failed"));
+            out.println(new Command("error", "server", "Registration failed").toJson());
         }
     }
 
@@ -253,6 +253,8 @@ public class ClientHandler extends Thread {
         Command message = new Command("message", senderUsername, textMessage);
         
         for (ClientHandler client : Server.clientActive) {
+            if (client == this)
+                continue ;
             if (client.instanceRoom != null && client.instanceRoom.getId().equals(this.instanceRoom.getId())) {
                 client.sendMessageToClient(message.toJson().toString());
             }
