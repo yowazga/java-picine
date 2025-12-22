@@ -6,7 +6,7 @@
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 09:49:23 by Younes            #+#    #+#             */
-/*   Updated: 2025/12/21 17:05:14 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/22 09:50:57 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ public class MessagesRepositoryImpl implements MessagesRepository,  RowMapper<Me
     @Override
     public void save(Message message) {
         
-        String sql = "INSERT INTO messages (user_id, text, created_at) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO messages (user_id, text, created_at) VALUES (?, ?, NOW())";
         
-        jdbcTemplate.update(sql, message.getSender().getId(), message.getMessage(), message.getTimestamp());
+        jdbcTemplate.update(sql, message.getSender().getId(), message.getMessage());
     }
 
     @Override

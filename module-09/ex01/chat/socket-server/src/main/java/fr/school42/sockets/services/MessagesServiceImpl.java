@@ -6,19 +6,19 @@
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 12:29:37 by Younes            #+#    #+#             */
-/*   Updated: 2025/12/21 17:33:52 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/22 09:51:51 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 package fr.school42.sockets.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import fr.school42.sockets.models.Message;
 import fr.school42.sockets.models.User;
 import fr.school42.sockets.repositories.MessagesRepository;
 import fr.school42.sockets.repositories.UsersRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Component
 public class MessagesServiceImpl implements MessagesService{

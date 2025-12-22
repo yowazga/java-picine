@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Server.java                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 18:01:45 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/04 16:48:16 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/22 10:28:16 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,24 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import fr.school42.sockets.services.MessagesService;
 import fr.school42.sockets.services.RoomsService;
 import fr.school42.sockets.services.UsersService;
 
+@Component
 public class Server {
 
+    @Autowired
     private UsersService usersService;
+    @Autowired
     private MessagesService messagesService;
+    @Autowired
     private RoomsService roomsService;
     public static List<ClientHandler> clientActive = Collections.synchronizedList(new ArrayList<>());
-
-    
-    public Server(UsersService usersService, MessagesService messagesService, RoomsService roomsService) {
-        this.usersService = usersService;
-        this.messagesService = messagesService;
-        this.roomsService = roomsService;
-    }
 
     public Server() {}
     
@@ -51,14 +52,14 @@ public class Server {
                     System.out.println("New client connected: " + clientSocket);
                     
                     clientActive.add(new ClientHandler(clientSocket, usersService, messagesService, roomsService));
-                } catch (Throwable e) {
+                } catch (IOException e) {
                     
                     System.err.println("Failed to create client listener: " + e.getMessage());
                 }
                 
             }
         } catch (IOException e) {
-            e.printStackTrace();;
+            System.err.println("Failed to start server: " + e.getMessage());
         }
         System.out.println("Server shutting down.");
     }

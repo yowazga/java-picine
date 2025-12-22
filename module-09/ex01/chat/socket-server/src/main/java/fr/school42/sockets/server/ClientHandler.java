@@ -6,7 +6,7 @@
 /*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 10:32:08 by Younes            #+#    #+#             */
-/*   Updated: 2025/12/21 17:28:42 by yowazga          ###   ########.fr       */
+/*   Updated: 2025/12/22 09:18:26 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,11 @@ public class ClientHandler extends Thread {
                 } else {
                     out.println("Invalid command");
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 out.println("Error: " + e.getMessage());
             }
         } catch (Exception e) {
             out.println("Error: " + e.getMessage());
-            e.printStackTrace();
         } finally {
             Server.clientActive.remove(this);
             try {
@@ -117,13 +116,10 @@ public class ClientHandler extends Thread {
     private void broadcastMessage(String sender, String messageText) {
 
         String fullMessage = sender + ": " + messageText;
-        synchronized (Server.clientActive) {
             for (ClientHandler client : Server.clientActive) {
                 if (client != this && client.isSignedIn())
                     client.sendMessageToClient(fullMessage);
             }
-        }
-        
     }
 
     private boolean isSignedIn() {

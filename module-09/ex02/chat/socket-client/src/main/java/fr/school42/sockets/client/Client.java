@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Client.java                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 11:39:44 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/08 16:56:04 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/22 10:40:50 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Scanner;
 
 import fr.school42.sockets.models.Command;
 
@@ -29,7 +30,7 @@ public class Client {
         try (Socket socket = new Socket(host, port);
              BufferedReader sockIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
              PrintWriter sockOut = new PrintWriter(socket.getOutputStream(), true);
-             BufferedReader userIn = new BufferedReader(new InputStreamReader(System.in))) {
+             Scanner userIn = new Scanner(System.in)) {
 
                 Thread reciveThread = new Thread(() -> {
                     
@@ -46,7 +47,6 @@ public class Client {
                                     System.out.println(command.getFrom() + ": " + command.getContent());
                                     break;
                                 case "error":
-                                    // System.out.println("ana hnaaaaa");
                                     System.out.println("Error: " + command.getContent());
                                 default:
                                     if (!command.getContent().isEmpty()) {
@@ -64,7 +64,7 @@ public class Client {
                 });
                 reciveThread.start();
                 while(true) {
-                    String input = userIn.readLine();
+                    String input = userIn.nextLine();
                     sockOut.println(new Command("command", "client", input).toJson());
                 }
         } catch (IOException e) {

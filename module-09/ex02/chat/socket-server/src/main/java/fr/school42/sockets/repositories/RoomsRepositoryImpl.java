@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   RoomsRepositoryImpl.java                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:01:56 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/04 16:19:26 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/22 10:09:47 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+
 import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+
 import fr.school42.sockets.models.Room;
 
+@Component
 public class RoomsRepositoryImpl implements RoomsRepository, RowMapper<Room> {
 
-    private JdbcTemplate jdbcTemplate;
+    private final  JdbcTemplate jdbcTemplate;
 
-    public RoomsRepositoryImpl(DataSource dataSource) {
+    @Autowired
+    public RoomsRepositoryImpl(@Qualifier("hikariDataSource")DataSource dataSource) {
         
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }

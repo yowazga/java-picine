@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MessagesRepositoryImpl.java                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 09:49:23 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/08 19:28:20 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/22 10:08:00 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,28 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.List;
+
 import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import fr.school42.sockets.models.Message;
 import fr.school42.sockets.models.Room;
 import fr.school42.sockets.models.User;
 
-@Repository
+@Component
 public class MessagesRepositoryImpl implements MessagesRepository,  RowMapper<Message> {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public MessagesRepositoryImpl(DataSource dataSource) {
+    @Autowired
+    public MessagesRepositoryImpl(@Qualifier("hikariDataSource")DataSource dataSource) {
         
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
@@ -49,7 +54,6 @@ public class MessagesRepositoryImpl implements MessagesRepository,  RowMapper<Me
             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, message.getSender().getId());
             stmt.setString(2, message.getMessage());
-            // stmt.setObject(3, message.getTimestamp());
             stmt.setTimestamp(3, new Timestamp(message.getTimestamp().getTime()));
             stmt.setLong(4, message.getRoom().getId());
             return stmt;

@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.java                                       :+:      :+:    :+:   */
+/*   Command.java                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/05 12:54:30 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/08 14:55:14 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/22 10:24:40 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 package fr.school42.sockets.shared;
 
 import java.util.Arrays;
+
 import org.json.JSONObject;
 
 public class Command {

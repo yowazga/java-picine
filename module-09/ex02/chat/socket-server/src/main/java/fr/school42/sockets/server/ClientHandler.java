@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClientHandler.java                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 10:32:08 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/08 18:51:19 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/22 10:35:48 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,20 @@ public class ClientHandler extends Thread {
                     if (chosed == null)
                         return ;
                     switch (chosed) {
-                        case "1":
+                        case "1" -> {
                             if (authenticateUser(in, out)) {
                                 handlRoomMenu(in, out);
                             }
-                            break;
-                        case "2":
-                            signUp(in, out);
-                            break ;
-                        case "3":
+                        }
+                        case "2" -> signUp(in, out);
+                        case "3" -> {
                             out.println(new Command("response", "server", "Goodbye!").toJson());
                             return;
-                        default:
-                            out.println(new Command("error", "server", "Invalid choice. Please try again.").toJson());
+                        }
+                        default -> out.println(new Command("error", "server", "Invalid choice. Please try again.").toJson());
                     }
                 }
-            } catch (Throwable e) {
+            } catch (IOException e) {
                 out.println(new Command("error", "server", e.getMessage()).toJson());
                 System.out.println("Caught exception: " + e.getMessage());
             }
@@ -144,18 +142,17 @@ public class ClientHandler extends Thread {
             if (chosed == null)
                 return ;
             switch (chosed) {
-                case "1":
-                    createRoom(in, out);
-                    break;
-                case "2":
+                case "1" -> createRoom(in, out);
+                case "2" -> {
                     if (choosRoom(in, out)) {
                         handlChat(in, out);
                     }
-                    break ;
-                case "3":
+                }
+                case "3" -> {
                     return ;
-                default:
-                    break;
+                }
+                default -> {
+                }
             }
         }
     }

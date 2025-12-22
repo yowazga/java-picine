@@ -3,27 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   RoomsServiceImpl.java                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:26:30 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/08 12:36:39 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/22 10:23:00 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 package fr.school42.sockets.services;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import fr.school42.sockets.models.Room;
 import fr.school42.sockets.repositories.RoomsRepository;
 
+@Component
 public class RoomsServiceImpl implements RoomsService {
 
+    @Autowired
     private RoomsRepository roomsRepository;
-
-    public RoomsServiceImpl(RoomsRepository roomsRepository) {
-        
-        this.roomsRepository = roomsRepository;
-    }
     
     @Override
     public Room createRoom(String name) {
@@ -35,7 +36,7 @@ public class RoomsServiceImpl implements RoomsService {
             throw new IllegalArgumentException("Room already exists");
         }
 
-        Room room = new Room(null, name);
+        Room room = new Room(name);
         roomsRepository.save(room);
         return room;
     }

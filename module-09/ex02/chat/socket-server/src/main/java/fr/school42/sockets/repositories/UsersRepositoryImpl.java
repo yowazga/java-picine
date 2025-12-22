@@ -3,38 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   UsersRepositoryImpl.java                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Younes <Younes@student.42.fr>              +#+  +:+       +#+        */
+/*   By: yowazga <yowazga@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/29 18:04:06 by Younes            #+#    #+#             */
-/*   Updated: 2025/07/03 18:16:23 by Younes           ###   ########.fr       */
+/*   Updated: 2025/12/22 10:05:53 by yowazga          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 package fr.school42.sockets.repositories;
 
-import java.sql.Statement; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Optional;
+
 import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
 import fr.school42.sockets.models.User;
 
-@Repository
+@Component
 public class UsersRepositoryImpl implements UsersRepository, RowMapper<User> {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public UsersRepositoryImpl(DataSource dataSource) {
+    @Autowired
+    public UsersRepositoryImpl(@Qualifier("hikariDataSource")DataSource dataSource) {
         
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
